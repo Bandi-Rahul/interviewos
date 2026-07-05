@@ -242,6 +242,9 @@ export interface UserAchievement {
 export interface DashboardSummary {
   problems_solved: number;
   problems_remaining: number;
+  easy_solved: number;
+  medium_solved: number;
+  hard_solved: number;
   current_streak: number;
   longest_streak: number;
   current_xp: number;

@@ -60,9 +60,9 @@ export default function DashboardPage() {
 
   const difficultyPieData = summary
     ? [
-        { name: 'Easy', value: (summary as Record<string, number>).easy_solved ?? 0, color: DIFFICULTY_COLORS.easy },
-        { name: 'Medium', value: (summary as Record<string, number>).medium_solved ?? 0, color: DIFFICULTY_COLORS.medium },
-        { name: 'Hard', value: (summary as Record<string, number>).hard_solved ?? 0, color: DIFFICULTY_COLORS.hard },
+        { name: 'Easy', value: summary.easy_solved ?? 0, color: DIFFICULTY_COLORS.easy },
+        { name: 'Medium', value: summary.medium_solved ?? 0, color: DIFFICULTY_COLORS.medium },
+        { name: 'Hard', value: summary.hard_solved ?? 0, color: DIFFICULTY_COLORS.hard },
       ].filter((d) => d.value > 0)
     : [];
 

@@ -18,7 +18,10 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24  # 24 hours
 
     # CORS
-    CORS_ALLOWED_ORIGINS: list[str] = ["http://localhost:5173"]
+    CORS_ALLOWED_ORIGINS: list[str] = [
+        "http://localhost:5173",
+        "https://bandi-rahul.github.io",
+    ]
 
     # Storage (optional)
     CLOUD_STORAGE_URL: str = ""

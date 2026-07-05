@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import api from '@/lib/api';
 
 export default function SignInPage() {
   const navigate = useNavigate();
@@ -13,18 +14,12 @@ export default function SignInPage() {
     setError('');
     setLoading(true);
     try {
-      // TODO: replace with real auth provider call
-      const res = await fetch('/api/auth/sign-in', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
-      if (!res.ok) throw new Error('Invalid credentials');
-      const { token } = await res.json();
-      localStorage.setItem('auth_token', token);
+      const { data } = await api.post<{ token: string }>('/auth/sign-in', { email, password });
+      localStorage.setItem('auth_token', data.token);
       navigate('/dashboard');
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Sign in failed');
+      const msg = (err as { response?: { data?: { detail?: string } } })?.response?.data?.detail;
+      setError(msg ?? 'Invalid email or password');
     } finally {
       setLoading(false);
     }

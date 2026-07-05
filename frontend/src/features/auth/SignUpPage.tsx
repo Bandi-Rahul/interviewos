@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import api from '@/lib/api';
 
 export default function SignUpPage() {
   const navigate = useNavigate();
@@ -20,22 +21,12 @@ export default function SignUpPage() {
 
     setLoading(true);
     try {
-      const res = await fetch('/api/auth/sign-up', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, password }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.detail ?? 'Sign up failed');
-      }
-
+      const { data } = await api.post<{ token: string }>('/auth/sign-up', { name, email, password });
       localStorage.setItem('auth_token', data.token);
       navigate('/dashboard');
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Sign up failed');
+      const msg = (err as { response?: { data?: { detail?: string } } })?.response?.data?.detail;
+      setError(msg ?? 'Sign up failed. Please try again.');
     } finally {
       setLoading(false);
     }

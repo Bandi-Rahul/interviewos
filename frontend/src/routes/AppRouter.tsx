@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ProtectedLayout } from '@/routes/ProtectedLayout';
 import SignInPage from '@/features/auth/SignInPage';
+import SignUpPage from '@/features/auth/SignUpPage';
 import DashboardPage from '@/features/dashboard/DashboardPage';
 import RoadmapPage from '@/features/roadmap/RoadmapPage';
 import ProblemsPage from '@/features/problems/ProblemsPage';
@@ -18,6 +19,7 @@ export function AppRouter() {
       <Routes>
         {/* Public routes */}
         <Route path="/sign-in" element={<SignInPage />} />
+        <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
         {/* Protected routes */}

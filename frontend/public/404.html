@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>InterviewOS</title>
+    <script>
+      // Single-Page Application redirect for GitHub Pages.
+      // When GitHub Pages serves a 404, this page saves the full URL to
+      // sessionStorage and redirects to the root. The index.html then
+      // reads sessionStorage and restores the original URL via history.replaceState.
+      sessionStorage.redirect = location.href;
+    </script>
+    <meta http-equiv="refresh" content="0;url=/interviewos/" />
+  </head>
+  <body></body>
+</html>
